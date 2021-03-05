@@ -1,0 +1,5 @@
+<app-user-profile-edit-view
+  [stations]="stations$ | async"
+  [favoriteStations]="favoriteStations$ | async"
+  (getFavoriteStations$)="getFavoriteStations($event)"
+></app-user-profile-edit-view>

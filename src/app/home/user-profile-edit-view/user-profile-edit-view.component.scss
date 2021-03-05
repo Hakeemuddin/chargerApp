@@ -1,0 +1,117 @@
+.user-profile-edit-card {
+  padding: 1rem;
+  mat-card-title {
+    text-align: center;
+    padding: 1rem;
+    border-bottom: .1rem solid black;
+    margin-bottom: 1rem;
+  }
+  &__content {
+    padding: 1rem;
+    .user-profile-form {
+
+      &__field {
+        display: flex;
+        mat-form-field {
+          flex: 1;
+        }
+      }
+      .favorite-header {
+        display: flex;
+        justify-content: space-between;
+        margin: 1rem 0;
+      }
+      .favorite-form {
+        border: .1rem solid black;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        &__field {
+          display: flex;
+          mat-form-field {
+            flex: 1;
+          }
+        }
+        &__action-buttons {
+          padding: 1rem;
+          display: flex;
+          justify-content: flex-end;
+          &--cancel {
+            margin-right: 1rem;
+          }
+        }
+      }
+      .favorites-list-container {
+        display: flex;
+        table {
+          flex: 1;
+          width: 100%;
+          tr {
+            td {
+              text-align: center;
+            }
+            td.remove-button {
+              text-align: center;
+              color: red;
+            }
+          }
+        }
+      }
+      .active-station-header {
+        display: flex;
+        margin: 1rem 0;
+        justify-content: space-between;
+      }
+      .active-station-form {
+        border: .1rem solid black;
+        padding: 1rem;
+        margin: 1.5rem 0;
+        &__field {
+          display: flex;
+          mat-form-field {
+            flex: 1;
+          }
+        }
+        &__action-buttons {
+          padding: 1rem;
+          display: flex;
+          justify-content: flex-end;
+          &--cancel {
+            margin-right: 1rem;
+          }
+        }
+      }
+      .active-stations-list-container {
+        display: flex;
+        table {
+          flex: 1;
+          width: 100%;
+          tr {
+            td {
+              text-align: center;
+            }
+            td.remove-button {
+              text-align: center;
+              color: red;
+            }
+          }
+        }
+      }
+
+    }
+    &__actions {
+      display: flex;
+      border-top: .1rem solid black;
+      margin-top: 1rem;
+      padding: 1rem;
+      justify-content: flex-end;
+      margin: 1rem 0;
+      &--cancel {
+        margin-right: 1rem;
+      }
+    }
+  }
+  .logout {
+    display: flex;
+    padding: 1rem;
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "charger-app-b674f": {
+      "hosting": {
+        "chargerApp": [
+          "charger-app-b674f"
+        ]
+      }
+    }
+  }
+}

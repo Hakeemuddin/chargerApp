@@ -1,0 +1,6 @@
+<app-user-profile-read-view
+  [user]="user"
+  (onEdit$)="onEdit()"
+  [favoriteStations]="favoriteStations$ | async"
+  (getFavoriteStations$)="getFavoriteStations($event)"
+></app-user-profile-read-view>

@@ -1,0 +1,288 @@
+<mat-card class="user-profile-edit-card">
+  <mat-card-title>Update Profile</mat-card-title>
+
+  <mat-card-content class="user-profile-edit-card__content">
+    <form
+      [formGroup]="userProfileForm"
+
+      class="user-profile-form"
+    >
+      <div class="user-profile-form__field">
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="Email"
+            formControlName="email"
+          />
+          <mat-error
+            *ngIf="userProfileForm?.controls?.email?.hasError('required')"
+            >Email is Mandatory</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="user-profile-form__field">
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="Phone Number"
+            formControlName="phoneNumber"
+          />
+          <mat-error
+            *ngIf="userProfileForm?.controls?.phoneNumber?.hasError('required')"
+            >Phone is Mandatory</mat-error
+          >
+        </mat-form-field>
+      </div>
+      <div class="user-profile-form__field">
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="First Name"
+            formControlName="firstName"
+          />
+          <mat-error
+            *ngIf="userProfileForm?.controls?.firstName?.hasError('required')"
+            >First Name is Mandatory</mat-error
+          >
+        </mat-form-field>
+      </div>
+
+      <div class="user-profile-form__field">
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="Last Name"
+            formControlName="lastName"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="favorite-header">
+        <h3>Favorite Stations</h3>
+        <button
+          mat-stroked-button
+          (click)="addFavorite()"
+          type="button"
+          color="secondary"
+        >
+          Add Favorite
+        </button>
+      </div>
+      <hr />
+      <form
+        [formGroup]="favoriteForm"
+        *ngIf="showFavoriteForm"
+        class="favorite-form"
+      >
+      <h3> Favorite Station</h3>
+      <hr />
+        <div class="favorite-form__field">
+          <mat-form-field>
+            <mat-label>Choose one</mat-label>
+            <mat-select [formControlName]="'stationId'">
+              <mat-option
+                *ngFor="let station of favoriteStationList"
+                value="{{ station?.stationId }}"
+                >{{ station?.name }}</mat-option
+              >
+            </mat-select>
+            <mat-hint>Select Favorite Station</mat-hint>
+            <mat-error
+              *ngIf="favoriteForm?.controls?.stationId?.hasError('required')"
+              >You must make a selection</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div class="favorite-form__action-buttons">
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="hideFavoriteForm()"
+            class="favorite-form__action-buttons--cancel"
+          >
+            Cancel
+          </button>
+          <button
+            mat-stroked-button
+            (click)="saveFavorite()"
+            color="primary"
+            type="button"
+            [disabled]="favoriteForm?.invalid"
+          >
+            Save Favorite
+          </button>
+        </div>
+      </form>
+
+      <div class="favorites-list-container">
+        <p *ngIf="!favoriteStations">No Favorite Stations</p>
+        <table *ngIf="favoriteStations && favoriteStations?.length">
+          <tr>
+            <th>Station Name</th>
+            <th>Location</th>
+            <th>Type</th>
+            <th>Availability</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+          <tr *ngFor="let station of favoriteStations; index as j">
+            <td>{{ station.name }}</td>
+            <td>{{ station.location }}</td>
+            <td>{{ station.type }}</td>
+            <td>{{ station.availability }}</td>
+            <td>{{ station.status }}</td>
+            <td class="remove-button" (click)="removeFavorite(j)">X</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="active-station-header">
+        <h3>Active Charging Sessions</h3>
+        <button
+          mat-stroked-button
+          (click)="addActiveStation()"
+          type="button"
+          color="secondary"
+        >
+          Add Active Station
+        </button>
+      </div>
+      <hr />
+      <form
+        [formGroup]="activeStationForm"
+        *ngIf="showactiveStationForm"
+        class="active-station-form"
+      >
+      <h3> Active Station</h3>
+      <hr />
+        <div class="active-station-form__field">
+          <mat-form-field>
+            <mat-label>Choose one</mat-label>
+            <mat-select [formControlName]="'stationId'">
+              <mat-option
+                *ngFor="let station of stations"
+                value="{{ station?.stationId }}"
+                >{{ station?.name }}</mat-option
+              >
+            </mat-select>
+            <mat-hint>Select Active Station</mat-hint>
+            <mat-error
+              *ngIf="favoriteForm?.controls?.stationId?.hasError('required')"
+              >You must make a selection</mat-error
+            >
+          </mat-form-field>
+        </div>
+        <div class="active-station-form__field">
+          <mat-form-field>
+            <input
+              type="number"
+              matInput
+              placeholder="Charging Time"
+              formControlName="chargingTime"
+            />
+          </mat-form-field>
+        </div>
+        <div class="active-station-form__field">
+          <mat-form-field>
+            <input
+              type="number"
+              matInput
+              placeholder="Power Cosumption"
+              formControlName="powerCosumption"
+            />
+          </mat-form-field>
+        </div>
+        <div class="active-station-form__field">
+          <mat-form-field>
+            <input
+              type="number"
+              matInput
+              placeholder="Cost"
+              formControlName="cost"
+            />
+          </mat-form-field>
+        </div>
+        <div class="active-station-form__action-buttons">
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="hideActiveStation()"
+            class="active-station-form__action-buttons--cancel"
+          >
+            Cancel
+          </button>
+          <button
+            mat-stroked-button
+            type="button"
+            (click)="saveActiveStation()"
+            color="primary"
+            [disabled]="activeStationForm?.invalid"
+          >
+            Save Active Station
+          </button>
+        </div>
+      </form>
+
+      <div class="active-stations-list-container">
+        <p *ngIf="!activeStations">No Active Charging Sessions</p>
+        <table *ngIf="activeStations && activeStations?.length">
+          <tr>
+            <th>Station Name</th>
+            <th>Location</th>
+            <th>Charging TIme</th>
+            <th>Power Consumption</th>
+            <th>Cost</th>
+            <th>Action</th>
+          </tr>
+          <tr *ngFor="let station of activeStations; index as i">
+            <td>{{ station.name }}</td>
+            <td>{{ station.location }}</td>
+            <td>{{ station.chargingTime }}</td>
+            <td>{{ station.powerCosumption }}</td>
+            <td>{{ station.cost }}</td>
+            <td class="remove-button" (click)="removeActiveStation(i)">X</td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- <p *ngIf="error" class="error">
+  {{ error }}
+</p> -->
+
+    </form>
+
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="user-profile-edit-card__content__actions">
+      <button
+        mat-raised-button
+        (click)="onCancel()"
+        type="button"
+        class="user-profile-edit-card__content__actions--cancel"
+      >
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        type="submit"
+        color="primary"
+        (click)="saveProfile()"
+        [disabled]="userProfileForm?.invalid"
+      >
+        Save
+      </button>
+    </div>
+    <div class="logout" *ngIf="user">
+      <button mat-raised-button (click)="logout()" type="button" color="accent">
+        logout
+      </button>
+    </div>
+  </mat-card-footer>
+
+
+</mat-card>

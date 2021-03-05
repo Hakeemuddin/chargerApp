@@ -1,0 +1,60 @@
+.user-profile-read-card {
+  padding: 1rem;
+  mat-card-title {
+    text-align: center;
+    padding: 1rem;
+    border-bottom: .1rem solid black;
+    margin-bottom: 1rem;
+  }
+  h3 {
+    font-weight: bold;
+  }
+  &__content {
+    padding: 1rem;
+    .user-field-row {
+      display: flex;
+      justify-content: space-between;
+      &__column1 {
+        flex-basis: 50%;
+      }
+      &__column2 {
+        flex-basis: 50%;
+        font-weight: bold;
+      }
+    }
+
+    .favorites-list-container {
+      display: flex;
+      table {
+        flex: 1;
+        width: 100%;
+        tr {
+          td {
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .active-stations-list-container {
+      display: flex;
+      table {
+        flex: 1;
+        width: 100%;
+        tr {
+          td {
+            text-align: center;
+          }
+        }
+      }
+    }
+    &__actions {
+      display: flex;
+      border-top: .1rem solid black;
+      margin-top: 1rem;
+      padding: 1rem;
+      justify-content: space-between;
+      margin: 1rem 0;
+    }
+  }
+}

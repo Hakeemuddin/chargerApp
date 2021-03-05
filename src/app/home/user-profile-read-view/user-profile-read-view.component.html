@@ -1,0 +1,90 @@
+<mat-card class="user-profile-read-card">
+  <mat-card-title>User Profile</mat-card-title>
+
+  <mat-card-content class="user-profile-read-card__content">
+    <div class="user-field-row">
+      <div class="user-field-row__column1">
+        <label>First Name</label>
+      </div>
+      <div class="user-field-row__column2">
+        {{ user?.firstName }}
+      </div>
+    </div>
+    <div class="user-field-row">
+      <div class="user-field-row__column1">
+        <label>Last Name</label>
+      </div>
+      <div class="user-field-row__column2">
+        {{ user?.lastName }}
+      </div>
+    </div>
+    <div class="user-field-row">
+      <div class="user-field-row__column1">
+        <label>Email</label>
+      </div>
+      <div class="user-field-row__column2">
+        {{ user?.email }}
+      </div>
+    </div>
+    <div class="user-field-row">
+      <div class="user-field-row__column1">
+        <label>Phone</label>
+      </div>
+      <div class="user-field-row__column2">
+        {{ user?.phoneNumber }}
+      </div>
+    </div>
+
+    <h3>Favorite Stations</h3>
+    <hr />
+    <div class="favorites-list-container">
+      <p *ngIf="!favoriteStations">No Favorite Stations</p>
+      <table *ngIf="favoriteStations">
+        <tr>
+          <th>Station Name</th>
+          <th>Location</th>
+          <th>Type</th>
+          <th>Availability</th>
+          <th>Status</th>
+        </tr>
+        <tr *ngFor="let station of favoriteStations">
+          <td>{{ station.name }}</td>
+          <td>{{ station.location }}</td>
+          <td>{{ station.type }}</td>
+          <td>{{ station.availability }}</td>
+          <td>{{ station.status }}</td>
+        </tr>
+      </table>
+    </div>
+
+    <h3>Active Charging Sessions</h3>
+    <hr />
+    <div class="active-stations-list-container">
+      <p *ngIf="!user?.activeStations">No Active Charging Sessions</p>
+      <table *ngIf="user?.activeStations">
+        <tr>
+          <th>Station Name</th>
+          <th>Location</th>
+          <th>Charging TIme</th>
+          <th>Power Consumption</th>
+          <th>Cost</th>
+        </tr>
+        <tr *ngFor="let station of user?.activeStations">
+          <td>{{ station.name }}</td>
+          <td>{{ station.location }}</td>
+          <td>{{ station.chargingTime }}</td>
+          <td>{{ station.powerCosumption }}</td>
+          <td>{{ station.cost }}</td>
+        </tr>
+      </table>
+    </div>
+  </mat-card-content>
+  <mat-card-footer>
+    <div class="user-profile-read-card__content__actions">
+      <button mat-flat-button (click)="logout()" color="accent">logout</button>
+      <button mat-flat-button (click)="onEdit$.emit()" color="primary">
+        Edit
+      </button>
+    </div>
+  </mat-card-footer>
+</mat-card>

@@ -1,0 +1,79 @@
+<mat-card>
+  <mat-card-title>{{ isNewUser ? "Register" : "Login" }}</mat-card-title>
+  <mat-card-subtitle *ngIf="isNewUser" style="text-align: center"
+    >Register by filling up the below form</mat-card-subtitle
+  >
+  <mat-card-subtitle *ngIf="!isNewUser" style="text-align: center"
+    >Login using your credentials</mat-card-subtitle
+  >
+  <mat-card-content>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <p>
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="Email"
+            formControlName="email"
+          />
+          <mat-error *ngIf="loginForm?.controls?.email?.hasError('required')"
+            >Email is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+
+      <p>
+        <mat-form-field>
+          <input
+            type="text"
+            matInput
+            placeholder="Phone Number"
+            formControlName="phoneNumber"
+          />
+          <mat-error
+            *ngIf="loginForm?.controls?.phoneNumber?.hasError('required')"
+            >Phone number is required</mat-error
+          >
+        </mat-form-field>
+      </p>
+
+      <p *ngIf="error" class="error">
+        {{ error }}
+      </p>
+
+      <div class="button" *ngIf="!isNewUser">
+        <button
+          type="submit"
+          mat-stroked-button
+          [disabled]="loginForm?.invalid"
+          color="primary"
+        >
+          Login
+        </button>
+      </div>
+      <div class="button" *ngIf="isNewUser">
+        <button
+          type="submit"
+          mat-stroked-button
+          [disabled]="loginForm?.invalid"
+          color="primary"
+        >
+          Register
+        </button>
+      </div>
+    </form>
+  </mat-card-content>
+  <mat-card-footer>
+    <hr />
+    <div class="button" *ngIf="!isNewUser">
+      <h3>New User?</h3>
+      <button mat-raised-button (click)="onRegister()" color="primary">
+        Register
+      </button>
+    </div>
+    <div class="button" *ngIf="isNewUser">
+      <h3>Existing User?</h3>
+      <button mat-raised-button (click)="onLogin()" color="primary">Login</button>
+    </div>
+  </mat-card-footer>
+</mat-card>
